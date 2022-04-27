@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Typography */
+
+p {
+  @apply leading-7 mb-3;
+}
+
+.h1{
+  @apply text-4xl font-bold mb-4;
+}
+
+
+/* Layout */
+.box {
+  @apply bg-gray-50 px-9 py-[90px]
+}
