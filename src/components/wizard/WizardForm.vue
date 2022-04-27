@@ -9,7 +9,7 @@
 
     <div class="box mt-8">
       <div class="xl:w-80 mx-auto">
-        <Radio />
+        <Radio :options="radioOptions" v-model="package" />
       </div>
     </div>
   </div>
@@ -32,6 +32,13 @@ export default {
     name: "",
     age: "",
     country: null,
+    package: null,
+
+    radioOptions: [
+      {value: "Standart", label: "Standart"},
+      {value: "Safe", label: "Safe"},
+      {value: "Super Safe", label: "Super Safe"},
+    ],
 
     countries:[
       {name: "Hong Kong", currency: "HKD"},
@@ -55,6 +62,12 @@ export default {
     }
   },
 
+  watch: {
+    package() {
+      this.handleChange()
+    }
+  },
+
   methods: {
     handleChange() {
       this.$emit('update:modelValue', {
@@ -62,6 +75,7 @@ export default {
         age: this.age || "",
         country: this.country || "",
         currency: this.currency || "",
+        package: this.package || ""
       });
     }
   },
