@@ -2,8 +2,8 @@
   <div>
     <h1 class="h1 text-center">Tell us about yourself</h1>
     <div class="xl:w-80 mx-auto mt-8">
-      <Input label="Name" v-model="name" @change="handleChange" />
-      <Input label="Age" v-model="age" @change="handleChange"/>
+      <Input label="Name" v-model="name" @keyup="handleChange" />
+      <Input label="Age" v-model="age" @keyup="handleChange"/>
       <Select label="Where do you live" v-model="country" :options="countryNames"  @change="handleChange" />
     </div>
 
@@ -35,15 +35,15 @@ export default {
     package: null,
 
     radioOptions: [
-      {value: "Standart", label: "Standart"},
-      {value: "Safe", label: "Safe"},
-      {value: "Super Safe", label: "Super Safe"},
+      {value: "Standart", label: "Standart", multiplier: 1},
+      {value: "Safe", label: "Safe", multiplier: 1.5},
+      {value: "Super Safe", label: "Super Safe", multiplier: 1.75},
     ],
 
     countries:[
-      {name: "Hong Kong", currency: "HKD"},
-      {name: "USA", currency: "USD"},
-      {name: "Australia", currency: "AUD"},
+      {name: "Hong Kong", currency: "HKD", priceAdj: 1},
+      {name: "USA", currency: "USD", priceAdj: 2},
+      {name: "Australia", currency: "AUD", priceAdj: 3},
     ]
   }),
 
@@ -51,15 +51,18 @@ export default {
     countryNames() {
       return this.countries.map(el=>el.name)
     },
-    currency() {
+    countryRecord() {
       if (!this.country) return false;
-      const countryRecord = this.countries.filter(el => el.name === this.country);
-      if (!countryRecord) return false;
-      return countryRecord[0].currency;
+      const rec = this.countries.filter(el => el.name === this.country);
+      if (!rec) return false;
+      return rec[0];
     },
-    dataOk() {
-      return this.name && this.age.match(/\d+/g) && this.country;
-    }
+    packageRecord() {
+      if (!this.package) return false;
+      const rec = this.radioOptions.filter(el => el.value === this.package);
+      if (!rec) return false;
+      return rec[0];
+    },
   },
 
   watch: {
@@ -74,7 +77,9 @@ export default {
         name: this.name || "",
         age: this.age || "",
         country: this.country || "",
-        currency: this.currency || "",
+        currency: this.countryRecord.currency || "",
+        priceAdj: this.countryRecord.priceAdj || 1,
+        packageMultiplier: this.packageRecord.multiplier || 1,
         package: this.package || ""
       });
     }

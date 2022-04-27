@@ -1,6 +1,5 @@
 <template>
   <span>
-    {{ !!clickHandler }}
     <span
       v-if="isDisabled"
       class="py-3 px-[60px] rounded font-bold border-2"
