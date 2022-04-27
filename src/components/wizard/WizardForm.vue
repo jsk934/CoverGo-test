@@ -2,19 +2,14 @@
   <div>
     <h1 class="h1 text-center">Tell us about yourself</h1>
     <div class="xl:w-80 mx-auto mt-8">
-      <Input label="Name" v-model="name" />
-      <Input label="Age" v-model="age"/>
-      <Select label="Where do you live" v-model="country" :options="countryNames" />
+      <Input label="Name" v-model="name" @change="handleChange" />
+      <Input label="Age" v-model="age" @change="handleChange"/>
+      <Select label="Where do you live" v-model="country" :options="countryNames"  @change="handleChange" />
     </div>
 
     <div class="box mt-8">
       <div class="xl:w-80 mx-auto">
         <Radio />
-      </div>
-      <h2 class="h2 text-center">Your premium is: 500HKD</h2>
-      <div class="text-center">
-        <link-button to="/" text="Back" kind="secondary" class="mr-3" />
-        <link-button to="/" text="Next" />
       </div>
     </div>
   </div>
@@ -24,12 +19,14 @@
 import Input from './../Input.vue';
 import Select from './../Select.vue';
 import Radio from './../Radio.vue';
-import LinkButton from './../LinkButton.vue';
+
 
 export default {
   name: 'WizardForm',
 
-  components: {LinkButton, Radio, Input, Select},
+  props: {
+    modelValue: Object,
+  },
 
   data: () => ({
     name: "",
@@ -56,6 +53,19 @@ export default {
     dataOk() {
       return this.name && this.age.match(/\d+/g) && this.country;
     }
-  }
+  },
+
+  methods: {
+    handleChange() {
+      this.$emit('update:modelValue', {
+        name: this.name || "",
+        age: this.age || "",
+        country: this.country || "",
+        currency: this.currency || "",
+      });
+    }
+  },
+
+  components: {Radio, Input, Select},
 };
 </script>
