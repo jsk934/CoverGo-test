@@ -1,7 +1,7 @@
 <template>
   <div class="xl:mt-8">
-    <wizard-form v-if="state==='form'" />
-    <wizard-summary v-else />
+    <wizard-form v-if="state==='form'" v-model="formData" />
+    <wizard-summary v-else :form-data="formData" />
   </div>
 </template>
 
@@ -14,6 +14,7 @@ export default {
 
   data: () => ({
     state: "form",
+    formData: {}
   }),
 
   components: {
