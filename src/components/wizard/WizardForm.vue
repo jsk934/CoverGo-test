@@ -57,6 +57,14 @@ export default {
       if (!rec) return false;
       return rec[0];
     },
+    radioOptions() {
+      return [
+        {value: "Standart", label: "Standart", multiplier: 1},
+        {value: "Safe", label: this.makeLabel('Safe', 0.5, 50), multiplier: 1.5},
+        {value: "Super Safe", label: this.makeLabel('Super Safe', 0.75, 75), multiplier: 1.75},
+      ]
+    },
+
     packageRecord() {
       if (!this.package) return false;
       const rec = this.radioOptions.filter(el => el.value === this.package);
@@ -80,6 +88,11 @@ export default {
   },
 
   methods: {
+    makeLabel(text, multiplier, percent) {
+      if (!this.age || !this.country) return text;
+      return `${text} (+${this.age * 10 * multiplier}${this.countryRecord.currency}, ${percent}%)`
+    },
+
     handleChange() {
       this.$emit('update:modelValue', {
         name: this.name || "",
