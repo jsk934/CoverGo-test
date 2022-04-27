@@ -7,7 +7,7 @@
       <Select label="Where do you live" v-model="country" :options="countryNames"  @change="handleChange" />
     </div>
 
-    <div class="box mt-8">
+    <div class="bg-gray-50 px-9 pt-12 mt-8">
       <div class="xl:w-80 mx-auto">
         <Radio :options="radioOptions" v-model="package" />
       </div>
@@ -69,6 +69,14 @@ export default {
     package() {
       this.handleChange()
     }
+  },
+
+  mounted() {
+    this.name = this.modelValue.name || "";
+    this.age = this.modelValue.age || null;
+    this.country = this.modelValue.country || null;
+    // TODO: fix missing package name when user returns from summary
+    this.package = this.modelValue.package || null;
   },
 
   methods: {

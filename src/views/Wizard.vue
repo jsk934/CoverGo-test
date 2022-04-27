@@ -1,6 +1,6 @@
 <template>
   <div class="xl:mt-8">
-    <template v-if="state==='form'">
+    <template v-if="view==='form'">
       <wizard-form v-model="formData" />
       <div class="box text-center">
         <h2 v-if="dataOk" class="h2 mb-8 text-center">Your premium is: {{ price }}{{ formData.currency }}</h2>
@@ -9,7 +9,7 @@
       </div>
     </template>
 
-    <wizard-summary v-else :form-data="formData" />
+    <wizard-summary v-else :form-data="formData" :back-handler="()=>{this.view='form'}" />
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
   name: 'Wizard',
 
   data: () => ({
-    state: "form",
+    view: "form",
     formData: {}
   }),
 
@@ -42,7 +42,8 @@ export default {
 
   methods: {
     handleFormSubmit() {
-      this.state = 'summary'
+      this.formData = {...this.formData, price:this.price};
+      this.view = 'summary';
     }
   },
 

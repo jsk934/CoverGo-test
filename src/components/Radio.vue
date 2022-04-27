@@ -33,6 +33,10 @@ export default {
     selected: null
   }),
 
+  mounted() {
+    this.selected = this.modelValue || "";
+  },
+
   watch: {
     selected(val) {
       this.$emit('update:modelValue', val);
