@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import LinkButton from './../LinkButton.vue';
+import LinkButton from '../common/LinkButton.vue';
 export default {
   name: 'WizardSummary',
   components: {LinkButton},

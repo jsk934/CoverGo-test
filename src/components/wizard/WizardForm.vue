@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import Input from './../Input.vue';
-import Select from './../Select.vue';
-import Radio from './../Radio.vue';
+import Input from '../common/Input.vue';
+import Select from '../common/Select.vue';
+import Radio from '../common/Radio.vue';
 
 
 export default {

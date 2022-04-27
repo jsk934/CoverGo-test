@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import LinkButton from './../components/LinkButton.vue';
+import LinkButton from '../components/common/LinkButton.vue';
 import WizardForm from './../components/wizard/WizardForm.vue';
 import WizardSummary from './../components/wizard/WizardSummary.vue';
 

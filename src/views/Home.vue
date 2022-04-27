@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import LinkButton from "./../components/LinkButton.vue"
+import LinkButton from "../components/common/LinkButton.vue"
 
 export default {
   name: 'Home',
